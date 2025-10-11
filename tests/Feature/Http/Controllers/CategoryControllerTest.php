@@ -4,28 +4,46 @@ declare(strict_types=1);
 
 use App\Models\Category;
 
-it('\'s index returns categories json', function (): void {
-    Category::factory()->create(['name' => 'Tech', 'slug' => 'tech'])->fresh();
-    Category::factory()->create(['name' => 'Food', 'slug' => 'food'])->fresh();
-
+it('does return list of categories', function (): void {
     $response = $this->getJson(route('api.v1.categories.index'));
 
-    $response->assertStatus(200)
-        ->assertJsonCount(2)
-        ->assertJsonFragment(['name' => 'Tech'])
-        ->assertJsonFragment(['name' => 'Food']);
-});
+    expect($response->status())->toBe(200)
+        ->and($response->json())->toHaveKeys(['message', 'status', 'data']);
+})->with([
+    fn () => Category::factory()->create(['name' => 'Tech', 'slug' => 'tech'])->fresh(),
+    fn () => Category::factory()->create(['name' => 'Food', 'slug' => 'food'])->fresh(),
+]);
 
-test('show returns a single category', function (): void {
-    $category = Category::factory()->create(['name' => 'Tech', 'slug' => 'tech']);
+it('does return empty list of category', function (): void {
+    $response = $this->getJson(route('api.v1.categories.index'));
+
+    expect($response->getStatusCode())->toBe(422);
+})->with([
+    fn () => Category::factory()->raw(),
+]);
+
+it('dose response a single category', function (Category $category): void {
 
     $response = $this->getJson(route('api.v1.categories.show', ['slug' => $category->slug]));
 
-    $response->assertStatus(200)
-        ->assertJsonFragment(['name' => 'Tech', 'slug' => 'tech']);
+    expect($response->getStatusCode())->toBeInt('200')
+        ->and($response->json('data'))->toMatchArray([
+            'id' => $category->id,
+            'slug' => $category->slug,
+            'name' => $category->name,
+        ]);
+
+})->with([
+    fn () => Category::factory()->create(['name' => 'Tech', 'slug' => 'tech']),
+]);
+
+it('not found in response a single category', function (): void {
+    $slug = 'test_1';
+    $response = $this->getJson(route('api.v1.categories.show', ['slug' => $slug]));
+    expect($response->getStatusCode())->toBe(404);
 });
 
-test('store creates a new category', function (): void {
+it('create a new category', function (): void {
     $payload = [
         'slug' => 'business',
         'name' => 'Business',
@@ -33,8 +51,28 @@ test('store creates a new category', function (): void {
 
     $response = $this->postJson(route('api.v1.categories.store'), $payload);
 
-    $response->assertStatus(200)
-        ->assertJsonFragment($payload);
+    $response->assertStatus(201);
 
     $this->assertDatabaseHas('categories', ['name' => 'Business']);
 });
+
+it('delete a category', function (Category $category): void {
+
+    $response = $this->deleteJson(route('api.v1.categories.destroy', ['slug' => $category->slug]));
+
+    expect($response->getStatusCode())->toBe(200);
+
+    $this->assertDatabaseCount('categories', 0);
+})->with([
+    fn () => Category::factory()->create(['name' => 'Tech', 'slug' => 'tech'])->fresh(),
+]);
+
+it('fail to delete a category', function (): void {
+    $response = $this->deleteJson(route('api.v1.categories.destroy', ['slug' => 'test']));
+
+    expect($response->getStatusCode())->toBe(422);
+
+    $this->assertDatabaseCount('categories', 1);
+})->with([
+    fn () => Category::factory()->create(['name' => 'Tech', 'slug' => 'tech'])->fresh(),
+]);

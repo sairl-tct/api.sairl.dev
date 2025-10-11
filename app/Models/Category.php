@@ -24,6 +24,12 @@ final class Category extends Model
      */
     use HasFactory;
 
+    protected $fillable = [
+        'slug',
+        'name',
+        'description',
+    ];
+
     protected function casts(): array
     {
         return [
