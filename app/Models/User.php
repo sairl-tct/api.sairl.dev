@@ -9,12 +9,10 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\Contracts\OAuthenticatable;
-use Laravel\Passport\HasApiTokens;
 
 /**
  * @property-read int $id
- * @property-read string $name
+ * @property-read string $username
  * @property-read string $email
  * @property-read CarbonInterface|null $email_verified_at
  * @property-read string $password
@@ -22,10 +20,10 @@ use Laravel\Passport\HasApiTokens;
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
-final class User extends Authenticatable implements OAuthenticatable
+final class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'id',
@@ -52,7 +50,7 @@ final class User extends Authenticatable implements OAuthenticatable
             'username' => 'string',
             'email' => 'string',
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

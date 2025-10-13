@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
-use App\Actions\Auth\RegisterAction;
+use App\Actions\Auth\RegisterUserAction;
 use App\Http\Requests\Auth\StoreRegisterRequest;
 use Illuminate\Http\JsonResponse;
 
-final class AuthController
+final class RegisteredUserController
 {
-    public function register(StoreRegisterRequest $request, RegisterAction $action): JsonResponse
+    public function store(StoreRegisterRequest $request, RegisterUserAction $action): JsonResponse
     {
         $request->validated();
 
