@@ -14,5 +14,5 @@ it('may be registered', function (): void {
     $response = $this->postJson(route('api.v1.auth.register'), $data);
 
     // Assert...
-    $response->assertStatus(201);
+    expect($response->getStatusCode())->toBe(201);
 });

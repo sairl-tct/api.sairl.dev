@@ -21,6 +21,5 @@ final class RegisteredUserController
             'status' => 'success',
             'message' => 'Successfully registered',
         ], 201);
-
     }
 }
