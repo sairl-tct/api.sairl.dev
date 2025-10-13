@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @extends Factory<Category>
@@ -19,8 +20,8 @@ final class CategoryFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'slug' => $this->faker->slug(),
-            'created_at' => \Illuminate\Support\Facades\Date::now(),
-            'updated_at' => \Illuminate\Support\Facades\Date::now(),
+            'created_at' => Date::now(),
+            'updated_at' => Date::now(),
         ];
     }
 }
