@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oauth_clients', function (Blueprint $table) {
+        Schema::create('oauth_clients', function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->nullableMorphs('owner');
             $table->string('name');
@@ -37,6 +39,8 @@ return new class extends Migration
      */
     public function getConnection(): ?string
     {
-        return $this->connection ?? config('passport.connection');
+        $connection = $this->connection ?? config('passport.connection');
+
+        return is_string($connection) ? $connection : null;
     }
 };
