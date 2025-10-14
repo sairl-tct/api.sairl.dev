@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\StatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->name('api.v1.')->middleware([])
