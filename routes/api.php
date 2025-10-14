@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\StatusController;
 use Illuminate\Support\Facades\Route;

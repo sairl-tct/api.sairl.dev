@@ -37,7 +37,7 @@ final class StatusController
             return response()->json([
                 'message' => 'status not found',
                 'status' => 'error',
-            ], 422);
+            ],422);
         }
 
         return response()->json([
