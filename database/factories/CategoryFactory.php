@@ -6,7 +6,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @extends Factory<Category>
@@ -18,8 +18,10 @@ final class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'name' => $this->faker->word(),
+            'slug' => $this->faker->slug(),
+            'created_at' => Date::now(),
+            'updated_at' => Date::now(),
         ];
     }
 }

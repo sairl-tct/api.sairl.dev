@@ -9,9 +9,10 @@ it('is toArray user data', function (): void {
     expect(array_keys($user->toArray()))
         ->toBe([
             'id',
-            'name',
+            'username',
             'email',
             'email_verified_at',
+            'remember_token',
             'created_at',
             'updated_at',
         ]);
