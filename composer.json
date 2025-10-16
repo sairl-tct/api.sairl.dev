@@ -1,9 +1,11 @@
 {
-  "$schema": "https://getcomposer.org/schema.json",
-  "name": "nunomaduro/laravel-starter-kit",
+  "name": "sairl/api.sairl.dev",
   "type": "project",
-  "description": "The skeleton application for the Laravel framework.",
+  "description": "The blog website for our software and application innovation research lab.",
   "keywords": [
+    "system",
+    "blog",
+    "api",
     "laravel",
     "framework"
   ],
