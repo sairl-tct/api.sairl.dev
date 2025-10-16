@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/email/verify/{id}/{hash}', function (\Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request): void {
     $request->fulfill();
-
-    return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');

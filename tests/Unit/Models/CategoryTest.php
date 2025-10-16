@@ -9,7 +9,7 @@ it('has fillable attributes', closure: function (): void {
     expect($category->getFillable())->toBe(['slug', 'name', 'description']);
 });
 
-it('is toArray category data', function (): void {
+test('to array', function (): void {
     $category = Category::factory()->create()->fresh();
     expect(array_keys($category->toArray()))
         ->toBe([
