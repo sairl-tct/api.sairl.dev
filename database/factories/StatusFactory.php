@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 
 /**
- * @extends Factory<Category>
+ * @extends Factory<Status>
  */
-final class CategoryFactory extends Factory
+final class StatusFactory extends Factory
 {
-    protected $model = Category::class;
+    protected $model = Status::class;
 
     public function definition(): array
     {
         return [
             'name' => $this->faker->word(),
-            'slug' => $this->faker->slug(),
+            'description' => $this->faker->text(),
             'created_at' => Date::now(),
             'updated_at' => Date::now(),
         ];
