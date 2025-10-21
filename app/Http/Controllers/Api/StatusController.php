@@ -10,6 +10,7 @@ use App\Actions\Statuses\CreateStatus;
 use App\Actions\Statuses\DeleteStatus;
 use App\Actions\Statuses\UpdateStatus;
 use App\Http\Requests\Statuses\StoreStatusRequest;
+use App\Http\Requests\Statuses\UpdateStatusRequest;
 use Illuminate\Http\JsonResponse;
 
 final class StatusController
@@ -62,16 +63,16 @@ final class StatusController
 
     }
 
-    public function update(int $id, UpdateStatus $updateStatus, StoreStatusRequest $request): JsonResponse
+    public function update(int $id, UpdateStatus $updateStatus, UpdateStatusRequest $request): JsonResponse
     {
         $status = $request->validated();
+        /** @var array{status: string, message: string, code: int, data?: mixed} $response */
         $response = $updateStatus->handle($id, $status);
 
         return response()->json([
-            'data' => $response,
-            'message' => 'update status success',
-            'status' => 'success',
-        ]);
+            'message' => $response['message'],
+            'status' => $response['status'],
+        ], $response['code']);
     }
 
     public function destroy(int $id, DeleteStatus $deleteStatus): JsonResponse
