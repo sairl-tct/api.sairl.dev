@@ -65,6 +65,7 @@ final class RoleController
     public function update(UpdateRole $updateRole, UpdateRoleRequest $request, int $id): JsonResponse
     {
         $role = $request->validated();
+        /** @var array{status: string, message: string, code: int, data?: mixed} $response */
         $response = $updateRole->handle($id, $role);
 
         return response()->json([
