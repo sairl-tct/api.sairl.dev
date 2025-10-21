@@ -6,7 +6,8 @@ namespace App\Actions\Queries\Roles;
 
 use App\Models\Role;
 
-final class GetRole {
+final class GetRole
+{
     public function handle(int $id): ?Role
     {
         return Role::query()->where('id', $id)->first();

@@ -7,24 +7,28 @@ namespace App\Http\Controllers\Api;
 use App\Actions\Queries\Roles\GetRole;
 use App\Actions\Queries\Roles\GetRoles;
 use App\Actions\Roles\CreateRole;
+use App\Actions\Roles\DeleteRole;
 use App\Actions\Roles\UpdateRole;
 use App\Http\Requests\Roles\StoreRoleRequest;
+use App\Http\Requests\Roles\UpdateRoleRequest;
 use Illuminate\Http\JsonResponse;
 
-final class RoleController {
-    public function index(GetRoles $getRoles):JsonResponse
+final class RoleController
+{
+    public function index(GetRoles $getRoles): JsonResponse
     {
         $response = $getRoles->handle();
         if ($response->isEmpty()) {
             return response()->json([
                 'message' => 'role is Empty',
-                'status' => 'error'
-            ],422);
+                'status' => 'error',
+            ], 422);
         }
+
         return response()->json([
             'data' => $response,
             'message' => 'retrieve role successfully',
-            'status' => 'success'
+            'status' => 'success',
         ]);
     }
 
@@ -35,18 +39,18 @@ final class RoleController {
         if (is_null($response)) {
             return response()->json([
                 'message' => 'role is not exist',
-                'status' => 'error'
-            ],422);
+                'status' => 'error',
+            ], 404);
         }
 
         return response()->json([
             'data' => $response,
             'message' => 'retrieve role successfully',
-            'status' => 'success'
+            'status' => 'success',
         ]);
     }
 
-    public function store(StoreRoleRequest $request, CreateRole $createRole):JsonResponse
+    public function store(StoreRoleRequest $request, CreateRole $createRole): JsonResponse
     {
         $role = $request->validated();
         $response = $createRole->handle($role);
@@ -54,12 +58,34 @@ final class RoleController {
         return response()->json([
             'data' => $response,
             'message' => 'create role successfully',
-            'status' => 'success'
-        ],201);
+            'status' => 'success',
+        ], 201);
     }
 
-    public function update(StoreRoleRequest $request, UpdateRole $updateRole, int $id): JsonResponse
+    public function update(UpdateRole $updateRole, UpdateRoleRequest $request, int $id): JsonResponse
     {
+        $role = $request->validated();
+        $response = $updateRole->handle($id, $role);
 
+        return response()->json([
+            'status' => $response['status'],
+            'message' => $response['message'],
+        ],$response['code']);
+    }
+
+    public function destroy(DeleteRole $deleteRole, int $id): JsonResponse
+    {
+        $response = $deleteRole->handle($id);
+        if (! $response) {
+            return response()->json([
+                'message' => 'role is not exist',
+                'status' => 'error',
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'delete role successfully',
+            'status' => 'success',
+        ]);
     }
 }

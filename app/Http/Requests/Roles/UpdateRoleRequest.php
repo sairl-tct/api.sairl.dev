@@ -6,7 +6,7 @@ namespace App\Http\Requests\Roles;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-final class StoreRoleRequest extends FormRequest
+final class UpdateRoleRequest extends FormRequest
 {
     /**
      * @return array<string, array<int, string>>
@@ -14,7 +14,7 @@ final class StoreRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:4', 'max:50', 'unique:roles,name'],
+            'name' => ['required', 'string', 'max:50'],
             'description' => ['nullable', 'string', 'max:255'],
         ];
     }

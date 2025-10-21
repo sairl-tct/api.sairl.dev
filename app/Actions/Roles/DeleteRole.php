@@ -6,7 +6,8 @@ namespace App\Actions\Roles;
 
 use App\Models\Role;
 
-final class DeleteRole {
+final class DeleteRole
+{
     public function handle(int $id): bool
     {
         $role = Role::query()->where('id', $id)->first();
