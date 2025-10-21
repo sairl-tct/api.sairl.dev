@@ -18,7 +18,7 @@ final class UpdateCategory {
         if (is_null($category)) {
             return [
                 'status' => 'error',
-                'message' => 'Role not found.',
+                'message' => 'Category not found.',
                 'code' => 404,
             ];
         }
@@ -40,7 +40,7 @@ final class UpdateCategory {
 
         return [
             'status' => 'success',
-            'message' => 'update role successfully',
+            'message' => 'update category successfully',
             'code' => 200,
         ];
     }
