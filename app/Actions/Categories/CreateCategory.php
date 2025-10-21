@@ -14,5 +14,6 @@ final class CreateCategory
     public function handle(array $data): Category
     {
         return Category::query()->create($data);
+        
     }
 }
