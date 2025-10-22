@@ -71,7 +71,7 @@ final class RoleController
         return response()->json([
             'status' => $response['status'],
             'message' => $response['message'],
-        ],$response['code']);
+        ], $response['code']);
     }
 
     public function destroy(DeleteRole $deleteRole, int $id): JsonResponse

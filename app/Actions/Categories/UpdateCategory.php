@@ -6,7 +6,8 @@ namespace App\Actions\Categories;
 
 use App\Models\Category;
 
-final class UpdateCategory {
+final class UpdateCategory
+{
     /**
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>
