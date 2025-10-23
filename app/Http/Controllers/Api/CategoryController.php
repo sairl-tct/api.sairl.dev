@@ -9,29 +9,23 @@ use App\Actions\Categories\DeleteCategory;
 use App\Actions\Categories\UpdateCategory;
 use App\Actions\Queries\Categories\GetCategories;
 use App\Actions\Queries\Categories\GetCategory;
+use App\Helpers\ApiResponse;
 use App\Http\Requests\Categories\StoreCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class CategoryController
 {
+    use ApiResponse;
     public function index(GetCategories $categories): JsonResponse
     {
         $response = $categories->handle();
 
         if ($response->isEmpty()) {
-            return response()->json([
-                'message' => 'categories is empty',
-                'status' => 'error',
-            ], 422);
+            return $this->notFound('categories not found');
         }
 
-        return response()->json(
-            [
-                'data' => $response,
-                'message' => 'retrieved categories successfully',
-                'status' => 'success',
-            ]);
+        return $this->success('categories retrieved successfully', $response);
     }
 
     public function show(string $slug, GetCategory $category): JsonResponse
@@ -39,17 +33,10 @@ final class CategoryController
         $response = $category->handle($slug);
 
         if (is_null($response)) {
-            return response()->json([
-                'message' => 'category is not exist',
-                'status' => 'error',
-            ], 422);
+            return $this->notFound('category not found');
         }
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'retrieved category successfully',
-            'status' => 'success',
-        ]);
+        return $this->success('category retrieved successfully', $response);
     }
 
     public function store(StoreCategoryRequest $request, CreateCategory $createCategory): JsonResponse
@@ -57,13 +44,8 @@ final class CategoryController
         $category = $request->validated();
         $response = $createCategory->handle($category);
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'create category successfully',
-            'status' => 'success',
-        ], 201);
+        return $this->created('category created successfully', $response);
     }
-
     public function update(string $slug, UpdateCategoryRequest $request, UpdateCategory $updateCategory): JsonResponse
     {
 
@@ -82,15 +64,9 @@ final class CategoryController
         $response = $deleteCategory->handle($slug);
 
         if (! $response) {
-            return response()->json([
-                'message' => 'cannot delete category',
-                'status' => 'error',
-            ], 422);
+            return $this->notFound('category not found');
         }
 
-        return response()->json([
-            'message' => 'delete category successfully',
-            'status' => 'success',
-        ]);
+        return $this->success('category deleted successfully');
     }
 }

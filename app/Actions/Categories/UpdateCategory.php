@@ -26,7 +26,7 @@ final class UpdateCategory
 
         $duplicate = Category::query()
             ->where('name', $data['name'])
-            ->where('slug', '!=', $slug)
+            ->whereNot('slug', $slug)
             ->exists();
 
         if ($duplicate) {
@@ -41,7 +41,7 @@ final class UpdateCategory
 
         return [
             'status' => 'success',
-            'message' => 'update category successfully',
+            'message' => 'category updated successfully',
             'code' => 200,
         ];
     }
