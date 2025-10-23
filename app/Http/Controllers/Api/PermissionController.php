@@ -23,7 +23,7 @@ final class PermissionController
 
         if($response->isEmpty())
         {
-            return $this->error('permissions not found',404);
+            return $this->notFound('permissions not found');
         }
         return $this->success('permission retrieved successfully', $response);
     }
@@ -33,7 +33,7 @@ final class PermissionController
         $response = $getPermission->handle($id);
         if(is_null($response))
         {
-            return $this->error('permission not found',404);
+            return $this->notFound('permission not found');
         }
 
         return $this->success('permission retrieved successfully', $response);
@@ -44,7 +44,7 @@ final class PermissionController
         $permission = $request->validated();
         $response = $createPermission->handle($permission);
 
-        return $this->success('permission created successfully', $response,201);
+        return $this->created('permission created successfully', $response);
     }
 
     public function update(int $id, UpdatePermissionRequest$request, UpdatePermission $updatePermission): JsonResponse
@@ -64,7 +64,7 @@ final class PermissionController
 
         if(!$response)
         {
-            return $this->error('permission not found', 404);
+            return $this->notFound('permission not found');
         }
 
         return $this->success('permission deleted successfully');
