@@ -26,7 +26,7 @@ final class UpdateRole
 
         $duplicate = Role::query()
             ->where('name', $data['name'])
-            ->where('id', '!=', $id)
+            ->whereNot('id', $id)
             ->exists();
 
         if ($duplicate) {
@@ -41,7 +41,7 @@ final class UpdateRole
 
         return [
             'status' => 'success',
-            'message' => 'update role successfully',
+            'message' => 'role updated successfully',
             'code' => 200,
         ];
     }

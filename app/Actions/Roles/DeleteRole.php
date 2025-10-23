@@ -10,7 +10,7 @@ final class DeleteRole
 {
     public function handle(int $id): bool
     {
-        $role = Role::query()->where('id', $id)->first();
+        $role = Role::query()->find($id);
         if (is_null($role)) {
             return false;
         }

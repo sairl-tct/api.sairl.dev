@@ -10,6 +10,6 @@ final class GetRole
 {
     public function handle(int $id): ?Role
     {
-        return Role::query()->where('id', $id)->first();
+        return Role::query()->find($id);
     }
 }

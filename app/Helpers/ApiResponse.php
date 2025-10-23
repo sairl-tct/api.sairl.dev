@@ -10,11 +10,14 @@ trait ApiResponse
 {
     protected function success(string $message, mixed $data = null): JsonResponse
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'data' => $data,
-        ], 200);
+        $response = [];
+        $response['status'] = 'success';
+        $response['message'] = $message;
+        if (! is_null($data)){
+            $response['data'] = $data;
+        }
+
+        return response()->json($response, 200);
     }
 
     protected function created(string $message, mixed $data = null): JsonResponse

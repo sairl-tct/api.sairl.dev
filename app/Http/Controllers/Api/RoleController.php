@@ -9,27 +9,22 @@ use App\Actions\Queries\Roles\GetRoles;
 use App\Actions\Roles\CreateRole;
 use App\Actions\Roles\DeleteRole;
 use App\Actions\Roles\UpdateRole;
+use App\Helpers\ApiResponse;
 use App\Http\Requests\Roles\StoreRoleRequest;
 use App\Http\Requests\Roles\UpdateRoleRequest;
 use Illuminate\Http\JsonResponse;
 
 final class RoleController
 {
+    use ApiResponse;
     public function index(GetRoles $getRoles): JsonResponse
     {
         $response = $getRoles->handle();
         if ($response->isEmpty()) {
-            return response()->json([
-                'message' => 'role is Empty',
-                'status' => 'error',
-            ], 422);
+            return $this->notFound('roles not found');
         }
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'retrieve role successfully',
-            'status' => 'success',
-        ]);
+        return $this->success('retrieved roles successfully', $response);
     }
 
     public function show(GetRole $getRole, int $id): JsonResponse
@@ -37,17 +32,10 @@ final class RoleController
         $response = $getRole->handle($id);
 
         if (is_null($response)) {
-            return response()->json([
-                'message' => 'role is not exist',
-                'status' => 'error',
-            ], 404);
+            return $this->notFound('role not found');
         }
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'retrieve role successfully',
-            'status' => 'success',
-        ]);
+        return $this->success('retrieved role successfully', $response);
     }
 
     public function store(StoreRoleRequest $request, CreateRole $createRole): JsonResponse
@@ -55,11 +43,7 @@ final class RoleController
         $role = $request->validated();
         $response = $createRole->handle($role);
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'create role successfully',
-            'status' => 'success',
-        ], 201);
+        return $this->created('role created successfully',$response);
     }
 
     public function update(UpdateRole $updateRole, UpdateRoleRequest $request, int $id): JsonResponse
@@ -78,15 +62,9 @@ final class RoleController
     {
         $response = $deleteRole->handle($id);
         if (! $response) {
-            return response()->json([
-                'message' => 'role is not exist',
-                'status' => 'error',
-            ]);
+            return $this->notFound('role not found');
         }
 
-        return response()->json([
-            'message' => 'delete role successfully',
-            'status' => 'success',
-        ]);
+        return $this->success('role deleted successfully');
     }
 }
