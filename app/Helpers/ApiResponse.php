@@ -8,12 +8,13 @@ use Illuminate\Http\JsonResponse;
 
 trait ApiResponse
 {
-    protected function success(string $message, mixed $data = null): JsonResponse {
+    protected function success(string $message, mixed $data = null): JsonResponse
+    {
         return response()->json([
             'status' => 'success',
             'message' => $message,
             'data' => $data,
-        ],200);
+        ], 200);
     }
 
     protected function created(string $message, mixed $data = null): JsonResponse
@@ -24,7 +25,6 @@ trait ApiResponse
             'data' => $data,
         ], 201);
     }
-
 
     protected function notFound(string $message = 'Resource not found'): JsonResponse
     {

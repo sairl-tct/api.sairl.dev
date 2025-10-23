@@ -6,16 +6,17 @@ namespace App\Actions\Permissions;
 
 use App\Models\Permission;
 
-final class UpdatePermission {
+final class UpdatePermission
+{
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
-    public function handle(int $id, array $data,): array
+    public function handle(int $id, array $data): array
     {
         $permission = Permission::query()->find($id);
 
-        if(is_null($permission)) {
+        if (is_null($permission)) {
             return [
                 'message' => 'Permission not found',
                 'status' => 'error',
@@ -28,11 +29,11 @@ final class UpdatePermission {
             ->whereNot('id', $id)
             ->exists();
 
-        if($duplicate) {
+        if ($duplicate) {
             return [
                 'message' => 'The name has already been taken.',
                 'status' => 'error',
-                'code' => 422
+                'code' => 422,
             ];
         }
 

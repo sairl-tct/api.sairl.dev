@@ -6,7 +6,8 @@ namespace App\Actions\Queries\Permissions;
 
 use App\Models\Permission;
 
-final class GetPermission {
+final class GetPermission
+{
     public function handle(int $id): ?Permission
     {
         return Permission::query()->find($id);
