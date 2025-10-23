@@ -33,22 +33,22 @@ Authorization: Bearer {your_token}
 ## 📚 API Endpoints
 
 ### 🧍 User & Auth
-| Method | Endpoint | Description | Auth |
-|:-------|:----------|:-------------|:------|
-| `POST` | `/auth/register` | Register a new user | No |
-| `POST` | `/auth/login` | Login and get token | No |
-| `GET` | `/auth/me` | Get authenticated user profile | Yes |
-| `POST` | `/auth/logout` | Logout current user | Yes |
+| Method | Endpoint | Description | Auth | Test |
+|:-------|:----------|:-------------|:------|:------|
+| `POST` | `/auth/register` | Register a new user | No | No |
+| `POST` | `/auth/login` | Login and get token | No | No |
+| `GET` | `/auth/me` | Get authenticated user profile | Yes | No |
+| `POST` | `/auth/logout` | Logout current user | Yes | No |
 
 ---
 
 ### 🏷️ Categories
-| Method | Endpoint | Description | Auth |
-|:-------|:----------|:-------------|:------|
-| `GET` | `/categories` | Get all categories | No |
-| `POST` | `/categories` | Create a new category | No |
-| `PUT` | `/categories/{slug}` | Update category | No |
-| `DELETE` | `/categories/{slug}` | Delete category | No |
+| Method | Endpoint | Description | Auth | Test |
+|:-------|:----------|:-------------|:------|:------|
+| `GET` | `/categories` | Get all categories | No | Yes |
+| `POST` | `/categories` | Create a new category | No | Yes |
+| `PUT` | `/categories/{slug}` | Update category | No | Yes |
+| `DELETE` | `/categories/{slug}` | Delete category | No | Yes |
 
 ---
 
