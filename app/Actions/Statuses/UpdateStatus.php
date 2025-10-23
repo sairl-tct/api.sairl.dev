@@ -10,38 +10,14 @@ final class UpdateStatus
 {
     /**
      * @param  array<string, mixed>  $data
-     * @return array<string, mixed>
      */
-    public function handle(int $id, array $data): array
+    public function handle(int $id, array $data): bool
     {
         $status = Status::query()->where('id', $id)->first();
         if (is_null($status)) {
-            return [
-                'status' => 'error',
-                'message' => 'Status not found.',
-                'code' => 404,
-            ];
+            return false;
         }
 
-        $duplicate = Status::query()
-            ->where('name', $data['name'])
-            ->where('id', '!=', $id)
-            ->exists();
-
-        if ($duplicate) {
-            return [
-                'status' => 'error',
-                'message' => 'The name has already been taken.',
-                'code' => 422,
-            ];
-        }
-
-        $status->update($data);
-
-        return [
-            'status' => 'success',
-            'message' => 'update status successfully',
-            'code' => 200,
-        ];
+        return $status->update($data);
     }
 }
