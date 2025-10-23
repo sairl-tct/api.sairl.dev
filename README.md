@@ -46,9 +46,43 @@ Authorization: Bearer {your_token}
 | Method | Endpoint | Description | Auth | Test |
 |:-------|:----------|:-------------|:------|:------|
 | `GET` | `/categories` | Get all categories | No | Yes |
+| `GET` | `/categories/{slug}` | Get category | No | Yes |
 | `POST` | `/categories` | Create a new category | No | Yes |
 | `PUT` | `/categories/{slug}` | Update category | No | Yes |
 | `DELETE` | `/categories/{slug}` | Delete category | No | Yes |
+
+---
+
+### 🏷️ Statuses
+| Method | Endpoint | Description | Auth | Test |
+|:-------|:----------|:-------------|:------|:------|
+| `GET` | `/statuses` | Get all statuses | No | Yes |
+| `GET` | `/statuses/{id}` | Get status | No | Yes |
+| `POST` | `/statuses` | Create a new status | No | Yes |
+| `PUT` | `/statuses/{id}` | Update status | No | Yes |
+| `DELETE` | `/statuses/{id}` | Delete status | No | Yes |
+
+---
+
+### 🏷️ Roles
+| Method | Endpoint | Description | Auth | Test |
+|:-------|:----------|:-------------|:------|:------|
+| `GET` | `/roles` | Get all statuses | No | Yes |
+| `GET` | `/roles/{id}` | Get role | No | Yes |
+| `POST` | `/roles` | Create a new role | No | Yes |
+| `PUT` | `/roles/{id}` | Update role | No | Yes |
+| `DELETE` | `/roles/{id}` | Delete role | No | Yes |
+
+---
+
+### 🏷️ Permissions
+| Method | Endpoint | Description | Auth | Test |
+|:-------|:----------|:-------------|:------|:------|
+| `GET` | `/permissions` | Get all permissions | No | Yes |
+| `GET` | `/permissions/{id}` | Get permission | No | Yes |
+| `POST` | `/permissions` | Create a new permission | No | Yes |
+| `PUT` | `/permissions/{id}` | Update permission | No | Yes |
+| `DELETE` | `/permissions/{id}` | Delete permission | No | Yes |
 
 ---
 
