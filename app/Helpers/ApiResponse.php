@@ -13,7 +13,7 @@ trait ApiResponse
         $response = [];
         $response['status'] = 'success';
         $response['message'] = $message;
-        if (! is_null($data)){
+        if (! is_null($data)) {
             $response['data'] = $data;
         }
 
