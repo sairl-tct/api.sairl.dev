@@ -70,11 +70,13 @@ final class CategoryController
         $category = $request->validated();
         /** @var array{status: string, message: string, code: int, data?: mixed} $response */
         $response = $updateCategory->handle($slug, $category);
+
         return response()->json([
             'message' => $response['message'],
             'status' => $response['status'],
         ], $response['code']);
     }
+
     public function destroy(string $slug, DeleteCategory $deleteCategory): JsonResponse
     {
         $response = $deleteCategory->handle($slug);
