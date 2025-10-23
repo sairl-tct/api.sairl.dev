@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 final class StatusController
 {
     use ApiResponse;
+
     public function index(GetStatuses $statuses): JsonResponse
     {
         $response = $statuses->handle();
