@@ -9,7 +9,7 @@ use App\Models\Permission;
 final class DeletePermission {
     public function handle(int $id): bool
     {
-        $permission = Permission::query()->where('id', $id)->first();
+        $permission = Permission::query()->find($id);
         if (is_null($permission)) {
             return false;
         }

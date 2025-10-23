@@ -9,6 +9,6 @@ use App\Models\Permission;
 final class GetPermission {
     public function handle(int $id): ?Permission
     {
-        return Permission::query()->where("id", $id)->first();
+        return Permission::query()->find($id);
     }
 }

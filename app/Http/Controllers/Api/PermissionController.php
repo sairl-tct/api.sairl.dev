@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Actions\Permissions\CreatePermission;
 use App\Actions\Permissions\DeletePermission;
 use App\Actions\Permissions\UpdatePermission;
@@ -15,22 +16,16 @@ use Illuminate\Http\JsonResponse;
 
 final class PermissionController
 {
+    use ApiResponse;
     public function index(GetPermissions $getPermissions): JsonResponse
     {
         $response = $getPermissions->handle();
 
         if($response->isEmpty())
         {
-            return response()->json([
-                'message' => 'permissions is empty',
-                'status' => 'error'
-            ], 422);
+            return $this->error('permissions not found',404);
         }
-        return response()->json([
-            'data' => $response,
-            'message' => 'retrieved permissions successfully',
-            'status' => 'success'
-        ]);
+        return $this->success('permission retrieved successfully', $response);
     }
 
     public function show(int $id, GetPermission $getPermission): JsonResponse
@@ -38,17 +33,10 @@ final class PermissionController
         $response = $getPermission->handle($id);
         if(is_null($response))
         {
-            return response()->json([
-                'message' => 'permission not found',
-                'status' => 'error'
-            ],404);
+            return $this->error('permission not found',404);
         }
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'retrieved permission successfully',
-            'status' => 'success'
-        ]);
+        return $this->success('permission retrieved successfully', $response);
     }
 
     public function store(StorePermissionRequest $request, CreatePermission $createPermission): JsonResponse
@@ -56,11 +44,7 @@ final class PermissionController
         $permission = $request->validated();
         $response = $createPermission->handle($permission);
 
-        return response()->json([
-            'data' => $response,
-            'message' => 'create permission successfully',
-            'status' => 'success'
-        ],201);
+        return $this->success('permission created successfully', $response,201);
     }
 
     public function update(int $id, UpdatePermissionRequest$request, UpdatePermission $updatePermission): JsonResponse
@@ -69,8 +53,8 @@ final class PermissionController
         /** @var array{status: string, message: string, code: int, data?: mixed} $response */
         $response = $updatePermission->handle($id, $permission);
         return response()->json([
-            'message' => $response['message'],
             'status' => $response['status'],
+            'message' => $response['message']
         ], $response['code']);
     }
 
@@ -80,15 +64,9 @@ final class PermissionController
 
         if(!$response)
         {
-            return response()->json([
-                'message' => 'permission not found',
-                'status' => 'error'
-            ],404);
+            return $this->error('permission not found', 404);
         }
 
-        return response()->json([
-            'message' => 'delete permission successfully',
-            'status' => 'success'
-        ]);
+        return $this->success('permission deleted successfully');
     }
 }

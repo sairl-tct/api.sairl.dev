@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permissions', function (Blueprint $table): void {
-            $table->unsignedTinyInteger('id', true)->primary();
+            $table->smallIncrements('id')->primary();
             $table->string('name', 50)->unique();
             $table->string('description', 255)->nullable();
             $table->timestamps();

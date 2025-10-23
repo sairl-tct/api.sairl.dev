@@ -13,7 +13,7 @@ final class UpdatePermission {
      */
     public function handle(int $id, array $data,): array
     {
-        $permission = Permission::query()->where('id', $id)->first();
+        $permission = Permission::query()->find($id);
 
         if(is_null($permission)) {
             return [
@@ -25,7 +25,7 @@ final class UpdatePermission {
 
         $duplicate = Permission::query()
             ->where('name', $data['name'])
-            ->where('id', '!=', $id)
+            ->whereNot('id', $id)
             ->exists();
 
         if($duplicate) {
