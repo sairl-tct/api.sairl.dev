@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 final class CategoryController
 {
     use ApiResponse;
+
     public function index(GetCategories $categories): JsonResponse
     {
         $response = $categories->handle();
@@ -46,6 +47,7 @@ final class CategoryController
 
         return $this->created('category created successfully', $response);
     }
+
     public function update(string $slug, UpdateCategoryRequest $request, UpdateCategory $updateCategory): JsonResponse
     {
 
