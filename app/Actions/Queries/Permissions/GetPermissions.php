@@ -7,7 +7,8 @@ namespace App\Actions\Queries\Permissions;
 use App\Models\Permission;
 use Illuminate\Database\Eloquent\Collection;
 
-final class GetPermissions {
+final class GetPermissions
+{
     /**
      * @return Collection<int, Permission>
      */

@@ -6,9 +6,10 @@ namespace App\Actions\Permissions;
 
 use App\Models\Permission;
 
-final class CreatePermission {
+final class CreatePermission
+{
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public function handle(array $data): Permission
     {
