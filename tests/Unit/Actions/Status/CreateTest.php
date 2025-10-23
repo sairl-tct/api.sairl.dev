@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+use App\Actions\Statuses\CreateStatus;
+use App\Models\Status;
 
 it('may create a status', function (): void {
     // Arrange
@@ -10,13 +12,13 @@ it('may create a status', function (): void {
     ];
 
     // Act...
-    $action = app(App\Actions\Statuses\CreateStatus::class);
+    $action = app(CreateStatus::class);
     $status = $action->handle($payload);
 
     // Assert
     expect($status)
-        ->toBeInstanceOf(App\Models\Status::class)
+        ->toBeInstanceOf(Status::class)
         ->and($status->name)->toBe('test')
         ->and($status->description)->toBe('test')
-        ->and(App\Models\Status::query()->count())->toBe(1);
+        ->and(Status::query()->count())->toBe(1);
 });
