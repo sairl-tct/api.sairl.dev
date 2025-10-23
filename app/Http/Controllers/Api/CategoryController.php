@@ -6,9 +6,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Actions\Categories\CreateCategory;
 use App\Actions\Categories\DeleteCategory;
+use App\Actions\Categories\UpdateCategory;
 use App\Actions\Queries\Categories\GetCategories;
 use App\Actions\Queries\Categories\GetCategory;
 use App\Http\Requests\Categories\StoreCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class CategoryController
@@ -60,6 +62,19 @@ final class CategoryController
             'message' => 'create category successfully',
             'status' => 'success',
         ], 201);
+    }
+
+    public function update(string $slug, UpdateCategoryRequest $request, UpdateCategory $updateCategory): JsonResponse
+    {
+
+        $category = $request->validated();
+        /** @var array{status: string, message: string, code: int, data?: mixed} $response */
+        $response = $updateCategory->handle($slug, $category);
+
+        return response()->json([
+            'message' => $response['message'],
+            'status' => $response['status'],
+        ], $response['code']);
     }
 
     public function destroy(string $slug, DeleteCategory $deleteCategory): JsonResponse

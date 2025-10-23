@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Categories;
+namespace App\Actions\Roles;
 
-use App\Models\Category;
+use App\Models\Role;
 
-final class UpdateCategory
+final class UpdateRole
 {
     /**
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
-    public function handle(string $slug, array $data): array
+    public function handle(int $id, array $data): array
     {
-        $category = Category::query()->where('slug', $slug)->first();
+        $role = Role::query()->find($id);
 
-        if (is_null($category)) {
+        if (is_null($role)) {
             return [
                 'status' => 'error',
-                'message' => 'Category not found.',
+                'message' => 'Role not found.',
                 'code' => 404,
             ];
         }
 
-        $duplicate = Category::query()
+        $duplicate = Role::query()
             ->where('name', $data['name'])
-            ->where('slug', '!=', $slug)
+            ->where('id', '!=', $id)
             ->exists();
 
         if ($duplicate) {
@@ -37,11 +37,11 @@ final class UpdateCategory
             ];
         }
 
-        $category->update($data);
+        $role->update($data);
 
         return [
             'status' => 'success',
-            'message' => 'update category successfully',
+            'message' => 'update role successfully',
             'code' => 200,
         ];
     }
