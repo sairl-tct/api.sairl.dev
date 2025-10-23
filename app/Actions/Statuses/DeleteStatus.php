@@ -10,7 +10,7 @@ final class DeleteStatus
 {
     public function handle(int $id): bool
     {
-        $status = Status::query()->where('id', $id)->first();
+        $status = Status::query()->find($id);
         if (is_null($status)) {
             return false;
         }

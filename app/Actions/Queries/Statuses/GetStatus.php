@@ -10,6 +10,6 @@ final class GetStatus
 {
     public function handle(int $id): ?Status
     {
-        return Status::query()->where('id', $id)->first();
+        return Status::query()->find($id);
     }
 }
