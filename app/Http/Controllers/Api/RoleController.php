@@ -17,6 +17,7 @@ use Illuminate\Http\JsonResponse;
 final class RoleController
 {
     use ApiResponse;
+
     public function index(GetRoles $getRoles): JsonResponse
     {
         $response = $getRoles->handle();
@@ -43,7 +44,7 @@ final class RoleController
         $role = $request->validated();
         $response = $createRole->handle($role);
 
-        return $this->created('role created successfully',$response);
+        return $this->created('role created successfully', $response);
     }
 
     public function update(UpdateRole $updateRole, UpdateRoleRequest $request, int $id): JsonResponse
