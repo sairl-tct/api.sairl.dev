@@ -6,10 +6,10 @@ namespace App\Actions\Tags;
 
 use App\Models\Tag;
 
-final class CreateTag {
+final class CreateTag
+{
     /**
-     * @param array<string, mixed>  $data
-     *
+     * @param  array<string, mixed>  $data
      */
     public function handle(array $data): Tag
     {
