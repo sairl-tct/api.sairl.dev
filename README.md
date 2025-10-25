@@ -86,6 +86,17 @@ Authorization: Bearer {your_token}
 
 ---
 
+### 🏷️ Tags
+| Method | Endpoint | Description | Auth | Test |
+|:-------|:----------|:-------------|:------|:------|
+| `GET` | `/tags` | Get all tags | No | Yes |
+| `GET` | `/tags/{id}` | Get tag | No | Yes |
+| `POST` | `/tags` | Create a new tag | No | Yes |
+| `PUT` | `/tags/{id}` | Update tag | No | Yes |
+| `DELETE` | `/tags/{id}` | Delete tag | No | Yes |
+
+---
+
 ## ⚙️ Installation (Backend Setup)
 
 ```bash
