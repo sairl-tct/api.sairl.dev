@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\StatusController;
+use App\Http\Controllers\Api\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->name('api.v1.')->middleware([])
@@ -49,5 +50,12 @@ Route::prefix('/v1')->name('api.v1.')->middleware([])
             Route::post('/', [PermissionController::class, 'store'])->name('store');
             Route::put('/{id}', [PermissionController::class, 'update'])->name('update')->whereNumber('id');
             Route::delete('/{id}', [PermissionController::class, 'destroy'])->name('destroy')->whereNumber('id');
+        });
+        Route::prefix('/tags')->name('tag.')->group(function (): void {
+            Route::get('/', [TagController::class, 'index'])->name('index');
+            Route::get('/{id}', [TagController::class, 'show'])->name('show')->whereNumber('id');
+            Route::post('/', [TagController::class, 'store'])->name('store');
+            Route::put('/{id}', [TagController::class, 'update'])->name('update')->whereNumber('id');
+            Route::delete('/{id}', [TagController::class, 'destroy'])->name('destroy')->whereNumber('id');
         });
     });
