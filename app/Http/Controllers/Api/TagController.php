@@ -37,28 +37,34 @@ final class TagController
 
         return $this->success('tag retrieved successfully', $response);
     }
+
     public function store(StoreTagRequest $request, CreateTag $createTag): JsonResponse
     {
         $tag = $request->validated();
         $response = $createTag->handle($tag);
+
         return $this->success('tag created successfully', $response);
     }
+
     public function update(UpdateTagRequest $request, int $id, UpdateTag $updateTag): JsonResponse
     {
         $tag = $request->validated();
         /** @var array{status: string, message: string, code: int, data?: mixed} $response */
         $response = $updateTag->handle($id, $tag);
+
         return response()->json([
             'status' => $response['status'],
             'message' => $response['message'],
         ], $response['code']);
     }
+
     public function destroy(int $id, DeleteTag $deleteTag): JsonResponse
     {
         $response = $deleteTag->handle($id);
-        if (!$response) {
+        if (! $response) {
             return $this->notFound('tag not found');
         }
+
         return $this->success('tag deleted successfully');
     }
 }

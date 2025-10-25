@@ -6,11 +6,11 @@ namespace App\Actions\Tags;
 
 use App\Models\Tag;
 
-final class UpdateTag {
+final class UpdateTag
+{
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      * @return array<string, mixed>
-     *
      */
     public function handle(int $id, array $data): array
     {
@@ -19,7 +19,7 @@ final class UpdateTag {
             return [
                 'status' => 'error',
                 'message' => 'Tag not found',
-                'code' => 404
+                'code' => 404,
             ];
         }
 
@@ -31,14 +31,15 @@ final class UpdateTag {
             return [
                 'status' => 'error',
                 'message' => 'The name has already been taken',
-                'code' => 422
+                'code' => 422,
             ];
         }
         $tag->update($data);
+
         return [
             'status' => 'success',
             'message' => 'Tag updated successfully',
-            'code' => 200
+            'code' => 200,
         ];
     }
 }
