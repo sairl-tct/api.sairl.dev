@@ -9,7 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 final class StoreTeamTagRequest extends FormRequest
 {
     /**
-     *
      * @return array<string, array<int, string>>
      */
     public function rules(): array

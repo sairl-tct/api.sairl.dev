@@ -8,7 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 final class UpdateTeamTagRequest extends FormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -17,7 +16,7 @@ final class UpdateTeamTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string','min:3', 'max:50'],
+            'name' => ['required', 'string', 'min:3', 'max:50'],
             'description' => ['nullable', 'string', 'max:255'],
         ];
     }

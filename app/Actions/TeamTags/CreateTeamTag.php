@@ -6,10 +6,10 @@ namespace App\Actions\TeamTags;
 
 use App\Models\TeamTag;
 
-final class CreateTeamTag {
+final class CreateTeamTag
+{
     /**
-     *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public function handle(array $data): TeamTag
     {

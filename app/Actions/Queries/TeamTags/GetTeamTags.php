@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 final class GetTeamTags
 {
     /**
-     *
      * @return Collection<int, TeamTag>
      */
     public function handle(): Collection

@@ -6,14 +6,15 @@ namespace App\Actions\TeamTags;
 
 use App\Models\TeamTag;
 
-final class DeleteTeamTag {
+final class DeleteTeamTag
+{
     public function handle(int $id): bool
     {
         $TeamTag = TeamTag::query()->find($id);
-        if (is_null($TeamTag))
-        {
+        if (is_null($TeamTag)) {
             return false;
         }
-        return (bool)$TeamTag->delete();
+
+        return (bool) $TeamTag->delete();
     }
 }

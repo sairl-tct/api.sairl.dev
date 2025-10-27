@@ -6,7 +6,8 @@ namespace App\Actions\TeamTags;
 
 use App\Models\TeamTag;
 
-final class UpdateTeamTag {
+final class UpdateTeamTag
+{
     public function handle(int $id, array $data): array
     {
         $TeamTag = TeamTag::query()->find($id);
@@ -32,6 +33,7 @@ final class UpdateTeamTag {
             ];
         }
         $TeamTag->update($data);
+
         return [
             'status' => 'success',
             'message' => 'Team tag successfully updated',
