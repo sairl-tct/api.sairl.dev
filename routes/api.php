@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\TeamTagController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->name('api.v1.')->middleware([])
@@ -57,5 +58,12 @@ Route::prefix('/v1')->name('api.v1.')->middleware([])
             Route::post('/', [TagController::class, 'store'])->name('store');
             Route::put('/{id}', [TagController::class, 'update'])->name('update')->whereNumber('id');
             Route::delete('/{id}', [TagController::class, 'destroy'])->name('destroy')->whereNumber('id');
+        });
+        Route::prefix('/team-tags')->name('team-tag.')->group(function (): void {
+            Route::get('/', [TeamTagController::class, 'index'])->name('index');
+            Route::get('/{id}', [TeamTagController::class, 'show'])->name('show')->whereNumber('id');
+            Route::post('/', [TeamTagController::class, 'store'])->name('store');
+            Route::put('/{id}', [TeamTagController::class, 'update'])->name('update')->whereNumber('id');
+            Route::delete('/{id}', [TeamTagController::class, 'destroy'])->name('destroy')->whereNumber('id');
         });
     });
