@@ -7,11 +7,11 @@ namespace App\Actions\Queries\Tags;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
-/**
- * @return Collection<int, Tag>
- */
 final class GetTags
 {
+    /**
+     * @return Collection<int, Tag>
+     */
     public function handle(): Collection
     {
         return Tag::all();
