@@ -6,7 +6,8 @@ namespace App\Actions\Queries\TeamCategories;
 
 use App\Models\TeamCategory;
 
-final class GetTeamCategory {
+final class GetTeamCategory
+{
     public function handle(int $id): ?TeamCategory
     {
         return TeamCategory::query()->find($id);

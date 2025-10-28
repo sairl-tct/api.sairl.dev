@@ -6,11 +6,10 @@ namespace App\Actions\TeamCategories;
 
 use App\Models\TeamCategory;
 
-
-final class CreateTeamCategory {
+final class CreateTeamCategory
+{
     /**
-     *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public function handle(array $data): TeamCategory
     {

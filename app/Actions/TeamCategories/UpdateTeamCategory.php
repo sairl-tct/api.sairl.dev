@@ -6,10 +6,10 @@ namespace App\Actions\TeamCategories;
 
 use App\Models\TeamCategory;
 
-final class UpdateTeamCategory {
+final class UpdateTeamCategory
+{
     /**
-     *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
     public function handle(int $id, array $data): array
@@ -19,7 +19,7 @@ final class UpdateTeamCategory {
             return [
                 'status' => 'error',
                 'message' => 'Team category not found',
-                'code' => 404
+                'code' => 404,
             ];
         }
 
@@ -31,14 +31,15 @@ final class UpdateTeamCategory {
             return [
                 'status' => 'error',
                 'message' => 'The name is already taken',
-                'code' => 422
+                'code' => 422,
             ];
         }
         $TeamCategory->update($data);
+
         return [
             'status' => 'success',
             'message' => 'Team category updated successfully',
-            'code' => 200
+            'code' => 200,
         ];
     }
 }

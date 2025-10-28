@@ -6,13 +6,15 @@ namespace App\Actions\TeamCategories;
 
 use App\Models\TeamCategory;
 
-final class DeleteTeamCategory {
+final class DeleteTeamCategory
+{
     public function handle(int $id): bool
     {
         $TeamCategory = TeamCategory::query()->find($id);
-        if(is_null($TeamCategory)){
+        if (is_null($TeamCategory)) {
             return false;
         }
-        return (bool)$TeamCategory->delete();
+
+        return (bool) $TeamCategory->delete();
     }
 }
