@@ -14,9 +14,10 @@ it('may be list of categories', function (): void {
 });
 
 it('may be empty list of category', function (): void {
+    // No categories created here -> DB is empty
+
     $response = $this->getJson(route('api.v1.categories.index'));
 
-    expect($response->getStatusCode())->toBe(422);
-})->with([
-    fn () => Category::factory()->raw(),
-]);
+    $response->assertStatus(404)
+        ->assertJsonPath('message', 'categories not found');
+}); 
