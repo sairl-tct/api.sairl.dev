@@ -6,12 +6,12 @@ use App\Actions\Queries\Categories\GetCategories;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 
-it('returns a list of categories', function () {
+it('returns a list of categories', function (): void {
     // Arrange: 3 categories in DB
     Category::factory()->count(3)->create();
 
     // action: get action categories
-    $categories= app(GetCategories::class);
+    $categories = app(GetCategories::class);
     $result = $categories->handle();
 
     // Assert: structure & count
@@ -23,7 +23,7 @@ it('returns a list of categories', function () {
     expect($result->first())->toBeInstanceOf(Category::class);
 });
 
-it('returns empty collection when there are no categories', function(){
+it('returns empty collection when there are no categories', function (): void {
     // Arrange: DB is empty (RefreshDatabase already handled this)
 
     // action: get action categories

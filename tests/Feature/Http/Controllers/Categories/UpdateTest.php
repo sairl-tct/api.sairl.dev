@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Category;
 
 it('updates a category successfully', function (): void {
-    // Arrange: existing category 
+    // Arrange: existing category
     $category = Category::factory()->create([
         'slug' => 'tech',
         'name' => 'tech',
@@ -29,14 +29,14 @@ it('updates a category successfully', function (): void {
         ->assertJsonPath('message', 'category updated successfully');
 
     // Assert: DB actually updated
-    $this->assertDatabaseHas('categories',[
+    $this->assertDatabaseHas('categories', [
         'id' => $category->id,
         'name' => 'Business',
         'description' => 'New description',
     ]);
 });
 
-it('returns 404 when category is not found', function (): void{
+it('returns 404 when category is not found', function (): void {
     $payload = [
         'name' => 'Business',
         'description' => 'New description',
@@ -53,7 +53,7 @@ it('returns 404 when category is not found', function (): void{
         ->assertJsonPath('message', 'Category not found.');
 });
 
-it('returns 422 when updating with a duplicate name', function():void{
+it('returns 422 when updating with a duplicate name', function (): void {
     // Arrange:
     // Category A with name 'Tech'
     Category::factory()->create([
@@ -83,7 +83,7 @@ it('returns 422 when updating with a duplicate name', function():void{
         ->assertJsonPath('message', 'The name has already been taken.');
 
     // Make sur B still has old name in DB
-    $this->assertDatabaseHas('categories',[
+    $this->assertDatabaseHas('categories', [
         'id' => $categoryToUpdate->id,
         'name' => 'Business',
     ]);

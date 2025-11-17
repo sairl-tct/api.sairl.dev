@@ -27,4 +27,3 @@ it('not found in response a single category', function (): void {
     $response->assertStatus(404)
         ->assertJsonPath('message', 'category not found');
 });
-

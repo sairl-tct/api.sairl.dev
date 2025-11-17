@@ -20,4 +20,4 @@ it('may be empty list of category', function (): void {
 
     $response->assertStatus(404)
         ->assertJsonPath('message', 'categories not found');
-}); 
+});
