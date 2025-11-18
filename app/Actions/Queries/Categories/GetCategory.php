@@ -8,8 +8,8 @@ use App\Models\Category;
 
 final class GetCategory
 {
-    public function handle(string $slug): ?Category
+    public function handle(string $uuid): ?Category
     {
-        return Category::query()->where('slug', $slug)->first();
+        return Category::query()->find($uuid);
     }
 }

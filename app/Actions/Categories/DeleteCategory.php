@@ -8,9 +8,9 @@ use App\Models\Category;
 
 final class DeleteCategory
 {
-    public function handle(string $slug): bool
+    public function handle(string $uuid): bool
     {
-        $category = Category::query()->where('slug', $slug)->first();
+        $category = Category::query()->find($uuid);
         if (is_null($category)) {
             return false;
         }

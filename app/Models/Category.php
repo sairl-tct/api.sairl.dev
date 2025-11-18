@@ -8,10 +8,10 @@ use Carbon\CarbonInterface;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
- * @property-read int $id
- * @property-read string $slug
+ * @property-read string $id
  * @property-read string $name
  * @property-read string $description
  * @property-read CarbonInterface $created_at
@@ -24,17 +24,33 @@ final class Category extends Model
      */
     use HasFactory;
 
+    /**
+     * UUID primary key, not auto-increment integer.
+     */
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected $fillable = [
-        'slug',
         'name',
         'description',
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        self::creating(function (Category $model): void {
+            // If id is empty, generate a UUID
+            if (empty($model->id)) {
+                $model->id = (string) Str::uuid();
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [
-            'id' => 'integer',
-            'slug' => 'string',
             'name' => 'string',
             'description' => 'string',
             'created_at' => 'datetime',

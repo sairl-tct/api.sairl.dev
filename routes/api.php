@@ -23,10 +23,10 @@ Route::prefix('/v1')->name('api.v1.')->middleware([])
 
         Route::prefix('/categories')->name('categories.')->group(function (): void {
             Route::get('/', [CategoryController::class, 'index'])->name('index');
-            Route::get('/{slug}', [CategoryController::class, 'show'])->name('show')->whereAlpha('slug');
+            Route::get('/{uuid}', [CategoryController::class, 'show'])->name('show')->whereUuid('uuid');
             Route::post('/', [CategoryController::class, 'store'])->name('store');
-            Route::put('/{slug}', [CategoryController::class, 'update'])->name('update');
-            Route::delete('/{slug}', [CategoryController::class, 'destroy'])->name('destroy')->whereAlpha('slug');
+            Route::put('/{uuid}', [CategoryController::class, 'update'])->name('update')->whereUuid('uuid');
+            Route::delete('/{uuid}', [CategoryController::class, 'destroy'])->name('destroy')->whereUuid('uuid');
         });
 
         Route::prefix('/statuses')->name('statuses.')->group(function (): void {

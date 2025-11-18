@@ -4,23 +4,46 @@ declare(strict_types=1);
 
 use App\Models\Category;
 
-it('delete a category', function (Category $category): void {
+/** @var Tests\TestCase $this */
+it('delete a category', function (): void {
+    // Arrange: one category exists
+    $category = Category::factory()->create([
+        'name' => 'Tech',
+        'description' => 'Tech description',
+    ]);
 
-    $response = $this->deleteJson(route('api.v1.categories.destroy', ['slug' => $category->slug]));
+    // Act: send DELETE with UUID in URL
+    $response = $this->deleteJson(
+        route('api.v1.categories.destroy', ['uuid' => $category->id])
+    );
 
-    expect($response->getStatusCode())->toBe(200);
+    // Assert HTTP + JSON
+    $response->assertStatus(200)
+        ->assertJsonPath('message', 'category deleted successfully');
 
+    // Assert DB: no categories left
     $this->assertDatabaseCount('categories', 0);
-})->with([
-    fn () => Category::factory()->create(['name' => 'Tech', 'slug' => 'tech'])->fresh(),
-]);
+});
 
 it('fail to delete a category', function (): void {
-    $response = $this->deleteJson(route('api.v1.categories.destroy', ['slug' => 'test']));
+    // Arrange: create 1 real category
+    Category::factory()->create([
+        'name' => 'Tech',
+        'description' => 'Tech description',
+    ]);
 
-    expect($response->getStatusCode())->toBe(404);
+    // Use a fake UUID that does NOT exist in DB
+    $fakeUuid = '00000000-0000-0000-0000-000000000000';
 
+    // Act
+    $response = $this->deleteJson(
+        route('api.v1.categories.destroy', ['uuid' => $fakeUuid])
+    );
+
+    // Assert HTTP + JSON
+    $response->assertStatus(404)
+        ->assertJsonPath('message', 'category not found');
+
+    // Assert DB: still 1 category
     $this->assertDatabaseCount('categories', 1);
-})->with([
-    fn () => Category::factory()->create(['name' => 'Tech', 'slug' => 'tech'])->fresh(),
-]);
+});

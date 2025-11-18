@@ -29,9 +29,9 @@ final class CategoryController
         return $this->success('categories retrieved successfully', $response);
     }
 
-    public function show(string $slug, GetCategory $category): \Illuminate\Http\JsonResponse
+    public function show(string $uuid, GetCategory $category): \Illuminate\Http\JsonResponse
     {
-        $response = $category->handle($slug);
+        $response = $category->handle($uuid);
 
         if (is_null($response)) {
             return $this->notFound('category not found');
@@ -48,12 +48,12 @@ final class CategoryController
         return $this->created('category created successfully', $response);
     }
 
-    public function update(string $slug, UpdateCategoryRequest $request, UpdateCategory $updateCategory): JsonResponse
+    public function update(string $uuid, UpdateCategoryRequest $request, UpdateCategory $updateCategory): JsonResponse
     {
 
         $category = $request->validated();
         /** @var array{status: string, message: string, code: int, data?: mixed} $response */
-        $response = $updateCategory->handle($slug, $category);
+        $response = $updateCategory->handle($uuid, $category);
 
         return response()->json([
             'message' => $response['message'],
@@ -61,9 +61,9 @@ final class CategoryController
         ], $response['code']);
     }
 
-    public function destroy(string $slug, DeleteCategory $deleteCategory): \Illuminate\Http\JsonResponse
+    public function destroy(string $uuid, DeleteCategory $deleteCategory): \Illuminate\Http\JsonResponse
     {
-        $response = $deleteCategory->handle($slug);
+        $response = $deleteCategory->handle($uuid);
 
         if (! $response) {
             return $this->notFound('category not found');
