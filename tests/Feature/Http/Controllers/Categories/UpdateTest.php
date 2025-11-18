@@ -7,7 +7,6 @@ use App\Models\Category;
 it('updates a category successfully', function (): void {
     // Arrange: existing category
     $category = Category::factory()->create([
-        'slug' => 'tech',
         'name' => 'tech',
         'description' => 'Old description',
     ]);
@@ -19,7 +18,7 @@ it('updates a category successfully', function (): void {
 
     // Action: send PUT request to update category
     $response = $this->putJson(
-        route('api.v1.categories.update', ['slug' => $category->slug]),
+        route('api.v1.categories.update', ['uuid' => $category->id]),
         $payload
     );
 
@@ -43,7 +42,7 @@ it('returns 404 when category is not found', function (): void {
     ];
 
     $response = $this->putJson(
-        route('api.v1.categories.update', ['slug' => 'unknown']),
+        route('api.v1.categories.update', ['uuid' => '00000000-0000-0000-0000-000000000000']),
         $payload
     );
 
@@ -57,13 +56,11 @@ it('returns 422 when updating with a duplicate name', function (): void {
     // Arrange:
     // Category A with name 'Tech'
     Category::factory()->create([
-        'slug' => 'tech',
         'name' => 'Tech',
     ]);
 
     // Category B that we will try to update to 'Tech'
     $categoryToUpdate = Category::factory()->create([
-        'slug' => 'business',
         'name' => 'Business',
     ]);
 
@@ -73,14 +70,14 @@ it('returns 422 when updating with a duplicate name', function (): void {
 
     // Action: send PUT request to update category
     $response = $this->putJson(
-        route('api.v1.categories.update', ['slug' => $categoryToUpdate->slug]),
+        route('api.v1.categories.update', ['uuid' => $categoryToUpdate->id]),
         $payload
     );
 
     // Assert: HTTP + JSON response
     $response->assertStatus(422)
         ->assertJsonPath('status', 'error')
-        ->assertJsonPath('message', 'The name has already been taken.');
+        ->assertJsonPath('message', 'The category has already been taken.');
 
     // Make sur B still has old name in DB
     $this->assertDatabaseHas('categories', [

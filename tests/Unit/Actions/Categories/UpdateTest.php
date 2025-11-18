@@ -7,7 +7,6 @@ use App\Models\Category;
 
 it('updates a category successfully', function (): void {
     $category = Category::factory()->create([
-        'slug' => 'laravel',
         'name' => 'Laravel',
         'description' => 'Old description',
     ]);
@@ -19,7 +18,7 @@ it('updates a category successfully', function (): void {
 
     // action
     $action = app(UpdateCategory::class);
-    $result = $action->handle($category->slug, $data);
+    $result = $action->handle($category->id, $data); // 👈 use id, not slug
 
     // Assert response structure
     expect($result)
@@ -37,19 +36,17 @@ it('updates a category successfully', function (): void {
 });
 
 it('return error when category is not found', function (): void {
-    // Arrange: do NOT create any category with this slug
-    $slug = 'unknown-slug';
+    // fake UUID that does not exist
+    $fakeId = '00000000-0000-0000-0000-000000000000';
 
     $data = [
         'name' => 'Whatever',
         'description' => 'Whatever',
     ];
 
-    // action: call action UpdateCategory
     $action = app(UpdateCategory::class);
-    $result = $action->handle($slug, $data);
+    $result = $action->handle($fakeId, $data);
 
-    // Assert
     expect($result)
         ->toBeArray()
         ->and($result['status'])->toBe('error')
@@ -59,27 +56,27 @@ it('return error when category is not found', function (): void {
 
 it('return error when the name is duplicate', function (): void {
     // Category A with name "Laravel"
-    Category::factory()->create([
-        'slug' => 'laravel',
+    $categoryA = Category::factory()->create([
         'name' => 'Laravel',
+        'description' => 'A description',
     ]);
 
     // Category B we'll try to update
     $categoryToUpdate = Category::factory()->create([
-        'slug' => 'php',
         'name' => 'PHP',
+        'description' => 'Another description',
     ]);
 
     $data = [
-        'name' => 'Laravel',
+        'name' => 'Laravel', // duplicate name
     ];
 
     $action = app(UpdateCategory::class);
-    $result = $action->handle($categoryToUpdate->slug, $data);
+    $result = $action->handle($categoryToUpdate->id, $data); // 👈 use id
 
     expect($result)
         ->toBeArray()
         ->and($result['status'])->toBe('error')
-        ->and($result['message'])->toBe('The name has already been taken.')
+        ->and($result['message'])->toBe('The category has already been taken.')
         ->and($result['code'])->toBe(422);
 });
