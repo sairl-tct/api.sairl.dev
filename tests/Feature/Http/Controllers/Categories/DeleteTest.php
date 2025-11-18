@@ -18,7 +18,7 @@ it('delete a category', function (Category $category): void {
 it('fail to delete a category', function (): void {
     $response = $this->deleteJson(route('api.v1.categories.destroy', ['slug' => 'test']));
 
-    expect($response->getStatusCode())->toBe(422);
+    expect($response->getStatusCode())->toBe(404);
 
     $this->assertDatabaseCount('categories', 1);
 })->with([

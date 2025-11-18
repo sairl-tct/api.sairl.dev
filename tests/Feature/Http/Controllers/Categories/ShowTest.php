@@ -20,7 +20,10 @@ it('dose response a single category', function (Category $category): void {
 ]);
 
 it('not found in response a single category', function (): void {
-    $slug = 'test_1';
+    $slug = 'unknownslug'; // only letters, no numbers/underscore
+
     $response = $this->getJson(route('api.v1.categories.show', ['slug' => $slug]));
-    expect($response->getStatusCode())->toBe(404);
+
+    $response->assertStatus(404)
+        ->assertJsonPath('message', 'category not found');
 });

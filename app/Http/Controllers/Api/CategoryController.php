@@ -18,7 +18,7 @@ final class CategoryController
 {
     use ApiResponse;
 
-    public function index(GetCategories $categories): JsonResponse
+    public function index(GetCategories $categories): \Illuminate\Http\JsonResponse
     {
         $response = $categories->handle();
 
@@ -29,7 +29,7 @@ final class CategoryController
         return $this->success('categories retrieved successfully', $response);
     }
 
-    public function show(string $slug, GetCategory $category): JsonResponse
+    public function show(string $slug, GetCategory $category): \Illuminate\Http\JsonResponse
     {
         $response = $category->handle($slug);
 
@@ -40,7 +40,7 @@ final class CategoryController
         return $this->success('category retrieved successfully', $response);
     }
 
-    public function store(StoreCategoryRequest $request, CreateCategory $createCategory): JsonResponse
+    public function store(StoreCategoryRequest $request, CreateCategory $createCategory): \Illuminate\Http\JsonResponse
     {
         $category = $request->validated();
         $response = $createCategory->handle($category);
@@ -61,7 +61,7 @@ final class CategoryController
         ], $response['code']);
     }
 
-    public function destroy(string $slug, DeleteCategory $deleteCategory): JsonResponse
+    public function destroy(string $slug, DeleteCategory $deleteCategory): \Illuminate\Http\JsonResponse
     {
         $response = $deleteCategory->handle($slug);
 
