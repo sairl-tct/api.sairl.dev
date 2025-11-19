@@ -18,7 +18,7 @@ it('create a new category', function (): void {
 
 it('it fails to create a category with duplicate name', function (): void {
     // Arrange: existing category
-    Category::factory()->create([
+    $a = Category::factory()->create([
         'name' => 'Tech',
     ]);
 

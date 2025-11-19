@@ -15,6 +15,6 @@ final class DeleteTag
             return false;
         }
 
-        return $tag->delete();
+        return (bool) $tag->delete();
     }
 }

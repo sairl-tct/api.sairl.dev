@@ -8,6 +8,10 @@ use App\Models\TeamTag;
 
 final class UpdateTeamTag
 {
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
     public function handle(int $id, array $data): array
     {
         $TeamTag = TeamTag::query()->find($id);
