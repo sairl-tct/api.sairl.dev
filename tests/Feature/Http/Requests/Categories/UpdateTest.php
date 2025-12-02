@@ -21,7 +21,7 @@ it('fails when name is too short', function (): void {
     $request = new UpdateCategoryRequest();
 
     $validator = Validator::make([
-        'name'        => 'Abc', // min:4
+        'name' => 'Abc', // min:4
         'description' => 'Short name',
     ], $request->rules());
 
@@ -33,7 +33,7 @@ it('fails when description is too long', function (): void {
     $request = new UpdateCategoryRequest();
 
     $validator = Validator::make([
-        'name'        => 'Valid Name',
+        'name' => 'Valid Name',
         'description' => str_repeat('a', 256), // > 255
     ], $request->rules());
 
@@ -45,7 +45,7 @@ it('passes when all fields are valid', function (): void {
     $request = new UpdateCategoryRequest();
 
     $validator = Validator::make([
-        'name'        => 'Valid Name',
+        'name' => 'Valid Name',
         'description' => 'Valid description',
     ], $request->rules());
 
