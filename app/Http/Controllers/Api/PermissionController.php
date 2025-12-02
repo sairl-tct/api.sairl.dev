@@ -31,6 +31,7 @@ final class PermissionController
 
     public function show(int $id, GetPermission $getPermission): JsonResponse
     {
+        // dd($id)
         $response = $getPermission->handle($id);
         if (is_null($response)) {
             return $this->notFound('permission not found');

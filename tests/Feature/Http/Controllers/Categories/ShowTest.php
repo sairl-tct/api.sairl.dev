@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Category;
 
-it('dose response a single category', function (Category $category): void {
+it('do response a single category', function (Category $category): void {
 
     $response = $this->getJson(route('api.v1.categories.show', ['uuid' => $category->id]));
 
