@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Permission;
 
-/** @var \Tests\TestCase $this */
-
+/** @var Tests\TestCase $this */
 it('updates a permission successfully', function (): void {
     // Arrange: existing permission
     $permission = Permission::factory()->create([
@@ -29,7 +28,7 @@ it('updates a permission successfully', function (): void {
 
     // Assert: DB actually updated
     $this->assertDatabaseHas('permissions', [
-        'id'   => $permission->id,
+        'id' => $permission->id,
         'name' => 'edit news articles',
     ]);
 });
@@ -78,6 +77,6 @@ it('returns 422 when updating with a duplicate name', function (): void {
     // Assert
     $response->assertStatus(422)
         ->assertJsonPath('status', 'error');
-        // If your UpdatePermission action returns a specific message:
-        // ->assertJsonPath('message', 'The name has already been taken.');
+    // If your UpdatePermission action returns a specific message:
+    // ->assertJsonPath('message', 'The name has already been taken.');
 });

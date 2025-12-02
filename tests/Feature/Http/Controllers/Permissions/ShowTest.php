@@ -14,7 +14,7 @@ it('returns a single permission', function (Permission $permission): void {
             'name' => $permission->name,
         ]);
 })->with([
-    fn() => Permission::factory()->create(['name' => 'edit articles']),
+    fn () => Permission::factory()->create(['name' => 'edit articles']),
 ]);
 
 it('returns 404 when permission is not found', function (): void {

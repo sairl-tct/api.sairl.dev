@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 declare(strict_types=1);
 
 use App\Http\Requests\Categories\StoreCategoryRequest;
@@ -29,7 +30,7 @@ it('fails when name is too short', function (): void {
         ->and($validator->errors())->toHaveKey('name');
 });
 
-it('fails when name is not unique', function (): void{
+it('fails when name is not unique', function (): void {
     Category::factory()->create([
         'name' => 'Business',
     ]);

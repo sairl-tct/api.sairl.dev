@@ -31,7 +31,6 @@ it('fail to delete a category', function (): void {
         'name' => 'Tech',
         'description' => 'Tech description',
     ]);
-    
 
     // Use a fake UUID that does NOT exist in DB
     $fakeUuid = '00000000-0000-0000-0000-000000000000';
