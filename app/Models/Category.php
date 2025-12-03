@@ -51,6 +51,7 @@ final class Category extends Model
     protected function casts(): array
     {
         return [
+            'id' => 'string',
             'name' => 'string',
             'description' => 'string',
             'created_at' => 'datetime',
