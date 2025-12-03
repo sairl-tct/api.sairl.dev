@@ -1,9 +1,10 @@
-<?php 
+<?php
+
 declare(strict_types=1);
 
 use App\Models\Role;
 
-it('has fillable properties', function () {
+it('has fillable properties', function (): void {
     $role = new Role();
 
     expect($role->getFillable())->toBe([
