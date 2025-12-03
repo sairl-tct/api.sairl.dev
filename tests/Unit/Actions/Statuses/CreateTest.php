@@ -4,7 +4,7 @@ declare(strict_types=1);
 use App\Actions\Statuses\CreateStatus;
 use App\Models\Status;
 
-it('may create a status', function (): void {
+it('creates a status successfully', function (): void {
     // Arrange
     $payload = [
         'name' => 'test',
@@ -22,3 +22,4 @@ it('may create a status', function (): void {
         ->and($status->description)->toBe('test')
         ->and(Status::query()->count())->toBe(1);
 });
+
