@@ -69,7 +69,7 @@ it('fails when name is not unique', function (): void {
     $existingStatusName = 'Completed';
 
     // Simulate existing status in the database
-    \App\Models\Status::factory()->create(['name' => $existingStatusName]);
+    App\Models\Status::factory()->create(['name' => $existingStatusName]);
 
     $request = new StoreStatusRequest();
 

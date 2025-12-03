@@ -22,4 +22,3 @@ it('creates a status successfully', function (): void {
         ->and($status->description)->toBe('test')
         ->and(Status::query()->count())->toBe(1);
 });
-

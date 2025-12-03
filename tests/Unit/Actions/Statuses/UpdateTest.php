@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 declare(strict_types=1);
 
 use App\Actions\Statuses\UpdateStatus;
@@ -42,7 +43,7 @@ it('return error when status is not found', function (): void {
         ->and($result['code'])->toBe(404);
 });
 
-it('return error when the name is duplicate', function ():void{
+it('return error when the name is duplicate', function (): void {
     $statusA = Status::factory()->create([
         'name' => 'Open',
         'description' => 'The task is open',
