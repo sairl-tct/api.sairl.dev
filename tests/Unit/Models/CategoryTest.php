@@ -6,7 +6,7 @@ use App\Models\Category;
 it('has fillable attributes', closure: function (): void {
     $category = Category::factory()->create();
 
-    expect($category->getFillable())->toBe(['slug', 'name', 'description']);
+    expect($category->getFillable())->toBe(['name', 'description']);
 });
 
 test('to array', function (): void {
@@ -14,7 +14,6 @@ test('to array', function (): void {
     expect(array_keys($category->toArray()))
         ->toBe([
             'id',
-            'slug',
             'name',
             'description',
             'created_at',
