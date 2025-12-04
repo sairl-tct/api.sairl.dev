@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Actions\Statuses\UpdateStatus;
 use App\Actions\Tags\UpdateTag;
-use App\Models\Status;
 use App\Models\Tag;
 
 it('update a tag successfully', function (): void {

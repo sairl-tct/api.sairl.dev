@@ -15,7 +15,7 @@ it('returns a single status', function (): void {
     // Act: call action with id
     $action = app(GetTag::class);
     $result = $action->handle($tag->id);
-    
+
     // Assert
     expect($result)
         ->toBeInstanceOf(Tag::class)

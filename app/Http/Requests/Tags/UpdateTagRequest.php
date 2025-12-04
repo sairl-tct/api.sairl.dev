@@ -15,7 +15,7 @@ final class UpdateTagRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:4', 'max:50'],
-            'description' => ['nullable', 'string','min:3', 'max:255'],
+            'description' => ['nullable', 'string', 'min:3', 'max:255'],
         ];
     }
 }

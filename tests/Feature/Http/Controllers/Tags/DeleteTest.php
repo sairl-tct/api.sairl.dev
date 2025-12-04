@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\Status;
 use App\Models\Tag;
 
 it('deletes a tag', function (): void {
