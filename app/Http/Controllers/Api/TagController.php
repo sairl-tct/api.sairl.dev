@@ -43,7 +43,7 @@ final class TagController
         $tag = $request->validated();
         $response = $createTag->handle($tag);
 
-        return $this->success('tag created successfully', $response);
+        return $this->created('tag created successfully', $response);
     }
 
     public function update(UpdateTagRequest $request, int $id, UpdateTag $updateTag): JsonResponse
