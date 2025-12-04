@@ -53,21 +53,21 @@ Route::prefix('/v1')->name('api.v1.')->middleware([])
             Route::put('/{id}', [PermissionController::class, 'update'])->name('update')->whereNumber('id');
             Route::delete('/{id}', [PermissionController::class, 'destroy'])->name('destroy')->whereNumber('id');
         });
-        Route::prefix('/tags')->name('tag.')->group(function (): void {
+        Route::prefix('/tags')->name('tags.')->group(function (): void {
             Route::get('/', [TagController::class, 'index'])->name('index');
             Route::get('/{id}', [TagController::class, 'show'])->name('show')->whereNumber('id');
             Route::post('/', [TagController::class, 'store'])->name('store');
             Route::put('/{id}', [TagController::class, 'update'])->name('update')->whereNumber('id');
             Route::delete('/{id}', [TagController::class, 'destroy'])->name('destroy')->whereNumber('id');
         });
-        Route::prefix('/team-tags')->name('team-tag.')->group(function (): void {
+        Route::prefix('/team-tags')->name('team-tags.')->group(function (): void {
             Route::get('/', [TeamTagController::class, 'index'])->name('index');
             Route::get('/{id}', [TeamTagController::class, 'show'])->name('show')->whereNumber('id');
             Route::post('/', [TeamTagController::class, 'store'])->name('store');
             Route::put('/{id}', [TeamTagController::class, 'update'])->name('update')->whereNumber('id');
             Route::delete('/{id}', [TeamTagController::class, 'destroy'])->name('destroy')->whereNumber('id');
         });
-        Route::prefix('/team-categories')->name('team-tag.')->group(function (): void {
+        Route::prefix('/team-categories')->name('team-categories.')->group(function (): void {
             Route::get('/', [TeamCategoryController::class, 'index'])->name('index');
             Route::get('/{id}', [TeamCategoryController::class, 'show'])->name('show')->whereNumber('id');
             Route::post('/', [TeamCategoryController::class, 'store'])->name('store');
