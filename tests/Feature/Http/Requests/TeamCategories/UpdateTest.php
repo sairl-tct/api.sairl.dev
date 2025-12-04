@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Http\Requests\TeamCategories\UpdateTeamCategoryRequest;
-use App\Http\Requests\TeamTags\UpdateTeamTagRequest;
 
 it('fails when name is missing', function (): void {
     // Arrange
