@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\Tag;
 use App\Models\TeamTag;
 
 it('returns a single team tag', function (TeamTag $teamTag): void {

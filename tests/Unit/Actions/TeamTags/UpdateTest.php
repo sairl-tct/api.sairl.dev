@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Actions\Tags\UpdateTag;
 use App\Actions\TeamTags\UpdateTeamTag;
-use App\Models\Tag;
 use App\Models\TeamTag;
 
 it('update a team tag successfully', function (): void {

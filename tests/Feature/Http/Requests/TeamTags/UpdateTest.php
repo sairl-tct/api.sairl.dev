@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Actions\TeamTags\UpdateTeamTag;
-use App\Http\Requests\Tags\UpdateTagRequest;
 use App\Http\Requests\TeamTags\UpdateTeamTagRequest;
 
 it('fails when name is missing', function (): void {
